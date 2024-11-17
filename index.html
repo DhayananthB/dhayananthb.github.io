@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -18,34 +18,44 @@
     />
     <style>
       :root {
-        --icon-color-light: black;
-        --icon-color-dark: #fefffe;
-        --background-color-light: #f7f7f7;
-        --text-color-light: #333333;
-        --background-color-dark: #262929;
-        --text-color-dark: #fefffe;
-        --accent-color: #4a8ff0;
+        /* Primary Icon Colors */
+        --icon-color-light: #4a5568;
+        --icon-color-dark: #e2e8f0;
+        --mobile-menu-icon-light: #2d3748; /* dark color for light mode */
+        --mobile-menu-icon-dark: #ffffff; /* light color for dark mode */
+
+        /* Background Colors */
+        --background-color-light: #e0e5ef;
+        --background-color-dark: #1a202c;
+
+        /* Text Colors */
+        --text-color-light: #2d3748;
+        --text-color-dark: #edf2f7;
+
+        /* Accent Color - A sophisticated blue */
+        --accent-color: #3b82f6;
+
+        /* Subtle gradient for decorative elements */
+        --accent-gradient: linear-gradient(135deg, #3b82f6, #60a5fa);
+
+        /* Card/Container Background Colors */
+        --card-bg-light: #ffffff;
+        --card-bg-dark: #2d3748;
       }
 
       body {
-        font-family: "Space Mono", serif;
+        font-family: "Poppins", sans-serif;
         font-weight: 400;
         font-style: normal;
         transition: background-color 0.3s, color 0.3s;
         margin: 0;
-      }
-
-      .content {
-        margin: 0 5%;
-        text-align: justify;
-        font-weight: 300;
-        font-size: 16px;
+        line-height: 1.6;
       }
 
       .container {
-        max-width: 960px;
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 30px;
+        padding: 20px;
       }
 
       nav {
@@ -57,12 +67,30 @@
         top: 0;
         background: inherit;
         z-index: 1000;
+        backdrop-filter: blur(10px);
       }
 
       .logo h1 {
-        font-size: 1.5rem;
-        font-weight: 400;
+        font-size: 2rem;
+        font-weight: 700;
         margin: 0;
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient 3s ease infinite;
+        background-size: 200% 200%;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       .nav-group {
@@ -82,10 +110,112 @@
         text-decoration: none;
         font-weight: bold;
         transition: color 0.3s;
+        position: relative;
       }
 
-      .nav-links a:hover {
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--accent-color);
+        transition: width 0.3s;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .main-content {
+        margin-top: 50px;
+      }
+
+      .hero-section {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
         color: var(--accent-color);
+        margin-bottom: 30px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+        padding: 30px;
+        border-radius: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .section:hover {
+        transform: translateY(-5px);
+      }
+
+      .section h2 {
+        margin-top: 0;
+        color: var(--accent-color);
+      }
+
+      .contact-info {
+        margin: 20px 0;
+      }
+
+      .contact-info a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+
+      .social-links {
+        margin-top: 30px;
+        display: flex;
+        gap: 20px;
+        justify-content: flex-start;
+      }
+
+      .social-links a {
+        color: inherit;
+        text-decoration: none;
+        padding: 10px 20px;
+        border: 2px solid var(--accent-color);
+        border-radius: 5px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-links a::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--accent-gradient);
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: -1;
+      }
+
+      .social-links a:hover::before {
+        opacity: 1;
+      }
+
+      .social-links a:hover {
+        color: white;
+        border-color: transparent;
       }
 
       #theme-toggle {
@@ -94,47 +224,146 @@
         cursor: pointer;
         padding: 5px;
         color: inherit;
-        transition: color 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        font-size: 1.2rem;
+        transition: transform 0.3s;
       }
 
-      #theme-toggle i {
-        font-size: 20px;
+      #theme-toggle:hover {
+        transform: rotate(180deg);
       }
 
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0;
-        gap: 25px;
+      .light-mode {
+        background-color: var(--background-color-light);
+        color: var(--text-color-light);
       }
 
-      .social-icons a {
-        font-size: 30px;
-        color: var(--icon-color-light);
-        transition: color 0.3s;
+      .light-mode .section {
+        background-color: var(--card-bg-light);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      .intro {
+      .dark-mode {
+        background-color: var(--background-color-dark);
+        color: var(--text-color-dark);
+      }
+
+      .dark-mode .section {
+        background-color: var(--card-bg-dark);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .skill-card {
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid var(--accent-color);
         text-align: center;
-        margin: 40px 0;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
       }
 
-      .profile-img {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
+      .skill-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--accent-gradient);
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: -1;
+      }
+
+      .skill-card:hover::before {
+        opacity: 0.1;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(240, 74, 102, 0.2);
+      }
+
+      /* Projects section styles */
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+      }
+
+      .project-card {
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--accent-gradient);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .project-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .project-card h3 {
+        color: var(--accent-color);
+        margin-top: 0;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .light-mode .project-card {
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Added visible border for light mode */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .project-tag {
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        background: var(--accent-gradient);
+        color: white;
       }
 
       .hamburger {
         display: none;
         flex-direction: column;
-        cursor: pointer;
         gap: 5px;
+        cursor: pointer;
         padding: 10px;
+        z-index: 1001;
       }
 
       .hamburger span {
@@ -142,70 +371,210 @@
         height: 3px;
         background-color: currentColor;
         transition: 0.3s;
+        border-radius: 3px;
       }
 
-      body.light-mode {
-        background-color: var(--background-color-light);
+      /* Base styles for buttons */
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 10px;
+        margin-right: 10px;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      /* Specific button styles */
+      .btn-code {
+        background-color: #6a1b9a; /* Purple */
+      }
+
+      .btn-code:hover {
+        background-color: #8e24aa;
+        transform: scale(1.05);
+      }
+
+      .btn-demo {
+        background-color: #ff5722; /* Orange */
+      }
+
+      .btn-demo:hover {
+        background-color: #ff7043;
+        transform: scale(1.05);
+      }
+
+      /* Project actions alignment */
+      .project-actions {
+        margin-top: 15px;
+      }
+
+      #cv-section {
+        text-align: center;
+        margin: 50px 0;
+      }
+
+      .cv-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .cv-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+      .copyright-section {
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 60px;
+        border-top: 2px solid;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+      }
+
+      .light-mode .copyright-section {
+        border-top-color: rgba(0, 0, 0, 0.1);
+        background-color: var(--card-bg-light);
         color: var(--text-color-light);
       }
 
-      body.dark-mode {
-        background-color: var(--background-color-dark);
+      .dark-mode .copyright-section {
+        border-top-color: rgba(255, 255, 255, 0.1);
+        background-color: var(--card-bg-dark);
         color: var(--text-color-dark);
       }
 
-      body.dark-mode .social-icons a {
-        color: var(--icon-color-dark);
+      .copyright-text {
+        margin: 0;
+        line-height: 1.8;
+        font-weight: 500;
       }
 
+      .copyright-symbol {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      .copyright-text a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .copyright-text a:hover {
+        text-decoration: underline;
+      }
+
+      .copyright-icon {
+        font-size: 1.2rem;
+        margin: 0 5px;
+      }
+
+      /* Mobile styles */
       @media (max-width: 768px) {
-        .nav-group {
-          display: none;
-          flex-direction: column;
-          position: absolute;
-          top: 60px;
-          right: 20px;
-          background-color: inherit;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          gap: 15px;
-        }
-
-        .nav-group.show {
-          display: flex;
-        }
-
-        .nav-links {
-          flex-direction: column;
-          align-items: flex-end;
-        }
-
-        .hamburger {
-          display: flex;
-        }
-
         .container {
           padding: 15px;
         }
 
-        .profile-img {
-          width: 150px;
-          height: 150px;
+        .hamburger {
+          display: flex !important;
         }
 
-        .content {
-          font-size: 15px;
+        .nav-group {
+          display: none;
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 250px;
+          background-color: var(--card-bg-dark);
+          padding: 80px 20px 20px;
+          box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
         }
 
-        #theme-toggle {
-          padding: 5px 0;
+        .light-mode .nav-group {
+          background-color: var(--card-bg-light);
+        }
+
+        .light-mode .nav-group a {
+          color: var(--mobile-menu-icon-light);
+        }
+
+        .dark-mode .nav-group a {
+          color: var(--mobile-menu-icon-dark);
+        }
+
+        .light-mode #theme-toggle {
+          color: var(--mobile-menu-icon-light);
+        }
+
+        .dark-mode #theme-toggle {
+          color: var(--mobile-menu-icon-dark);
+        }
+
+        .nav-group.show {
+          display: flex;
+          flex-direction: column;
+          transform: translateX(0);
+        }
+
+        .nav-links {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links a {
+          padding: 10px 0;
+          width: 100%;
+        }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .social-links {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .social-links a {
+          text-align: center;
+        }
+
+        /* Animate hamburger menu */
+        .hamburger.active span:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
         }
       }
     </style>
   </head>
   <body class="dark-mode">
+    <!-- Existing nav and hero section remain the same -->
+
     <div class="container">
+      <!-- Previous sections remain the same -->
       <nav>
         <div class="logo">
           <h1>Dhayananth B</h1>
@@ -213,8 +582,30 @@
 
         <div class="nav-group" id="navGroup">
           <div class="nav-links">
-            <a href="/resume">Resume</a>
-            <a href="/blog">Blog</a>
+            <a href="#contact">
+              <i class="fa-regular fa-envelope fa-lg"></i>
+            </a>
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-github fa-lg"></i>
+            </a>
+            <a
+              href="https://linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-linkedin fa-lg"></i>
+            </a>
+            <a
+              href="https://twitter.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-twitter fa-lg"></i>
+            </a>
           </div>
           <button id="theme-toggle">
             <i class="fas fa-sun"></i>
@@ -227,43 +618,160 @@
           <span></span>
         </div>
       </nav>
+      <div class="main-content">
+        <div class="hero-section">
+          <h1 class="hero-title">Machine Learning Engineer</h1>
+          <p class="hero-subtitle">
+            Transforming Data into Actionable Insights
+          </p>
+          <section id="cv-section">
+            <a href="/path-to-your-cv.pdf" class="cv-button" download>
+              Download CV
+            </a>
+          </section>
+        </div>
 
-      <section class="content">
+        <div class="section">
+          <h2>About Me</h2>
+          <p>
+            I'm a passionate data scientist and machine learning engineer with
+            expertise in computer vision and data analytics. At SECE, I lead
+            various ML projects, focusing on developing innovative solutions to
+            real-world problems.
+          </p>
+          <p>
+            With a strong background in research and practical applications, I
+            specialize in developing cutting-edge deep learning solutions that
+            drive business value and technological advancement.
+          </p>
+        </div>
 
-        <h1></h1>
+        <div class="section">
+          <h2>Skills & Expertise</h2>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <h3>Machine Learning</h3>
+              <p>Deep Learning, Neural Networks, Computer Vision</p>
+            </div>
+            <div class="skill-card">
+              <h3>Data Science</h3>
+              <p>Data Analytics, Statistical Analysis, Visualization</p>
+            </div>
+            <div class="skill-card">
+              <h3>Programming</h3>
+              <p>Python, TensorFlow, PyTorch, SQL</p>
+            </div>
+          </div>
+        </div>
 
-        <p style="margin: 5%">
-          I'm diving into a vibrant world where data dances with creativity! I'm
-          passionate about data science and machine learning, always on the
-          lookout for new and exciting challenges across different domains. With
-          a knack for solving problems and turning data into action, I thrive on
-          making complex insights feel effortless.
-        </p>
-        <section class="social-icons">
-          <a href="https://github.com/dhayananthb" target="_blank" class="icon">
-            <i class="fab fa-github"></i>
-          </a>
-          <a
-            href="https://in.linkedin.com/in/dhayananthb"
-            target="_blank"
-            class="icon"
-          >
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="mailto:dhayananthtn@gmail.com" class="icon">
-            <i class="fas fa-envelope"></i>
-          </a>
-          <a href="https://t.me/DhayananthB" target="_blank" class="icon">
-            <i class="fab fa-telegram"></i>
-          </a>
+        <div class="section">
+          <h2>Featured Projects</h2>
+          <div class="project-grid">
+            <div class="project-card">
+              <h3>Computer Vision Analytics</h3>
+              <p>
+                Advanced image recognition system for real-time object detection
+                and classification using deep learning.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://github.com/yourusername/computer-vision-analytics"
+                  class="btn btn-code"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Code
+                </a>
+                <a
+                  href="https://yourdemo.com/computer-vision-analytics"
+                  class="btn btn-demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Demo
+                </a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>Predictive Analytics Platform</h3>
+              <p>
+                End-to-end machine learning pipeline for predicting business
+                metrics with automated feature engineering.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://github.com/yourusername/predictive-analytics-platform"
+                  class="btn btn-code"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Code
+                </a>
+                <a
+                  href="https://yourdemo.com/predictive-analytics-platform"
+                  class="btn btn-demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Demo
+                </a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>NLP Research Tool</h3>
+              <p>
+                Text analysis toolkit for processing and analyzing large-scale
+                document collections.
+              </p>
+              <div class="project-actions">
+                <a
+                  href="https://github.com/yourusername/nlp-research-tool"
+                  class="btn btn-code"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Code
+                </a>
+                <a
+                  href="https://yourdemo.com/nlp-research-tool"
+                  class="btn btn-demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section id="contact">
+          <div class="section">
+            <h2>Contact</h2>
+            <div class="contact-info">
+              Email:
+              <a href="mailto:dhayananthtn@gmail.com">dhayananthtn@gmail.com</a
+              ><br />
+              CV: <a href="#">View CV</a>
+            </div>
+
+            <div class="social-links">
+              <a href="https://github.com/dhayananthb" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="https://in.linkedin.com/in/dhayananthb" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+              </a>
+              <a href="mailto:dhayananthtn@gmail.com">
+                <i class="fas fa-envelope"></i> Email
+              </a>
+            </div>
+
+            <!-- Rest of the content remains the same -->
+          </div>
         </section>
-
-        <h3>Experience</h3>
-        <p>Student @SECE</p>
-
-        <h3>Projects</h3>
-        <p>📚 Project la pannala</p>
-      </section>
+      </div>
     </div>
 
     <script>
@@ -272,35 +780,68 @@
       const navGroup = document.getElementById("navGroup");
       const themeIcon = themeToggle.querySelector("i");
 
-      // Apply saved theme
-      const currentTheme = localStorage.getItem("theme") || "dark-mode";
-      document.body.classList.add(currentTheme);
-      themeIcon.className =
-        currentTheme === "light-mode" ? "fas fa-moon" : "fas fa-sun";
+      // Theme initialization
+      function initializeTheme() {
+        const savedTheme = localStorage.getItem("theme") || "dark-mode";
+        document.body.classList.remove("dark-mode", "light-mode");
+        document.body.classList.add(savedTheme);
+        themeIcon.className =
+          savedTheme === "light-mode" ? "fas fa-moon" : "fas fa-sun";
+      }
+
+      // Call initializeTheme when the page loads
+      document.addEventListener("DOMContentLoaded", initializeTheme);
 
       // Theme toggle
       themeToggle.addEventListener("click", function () {
         const isDark = document.body.classList.contains("dark-mode");
-        document.body.classList.toggle("dark-mode");
-        document.body.classList.toggle("light-mode");
+        document.body.classList.remove("dark-mode", "light-mode");
+        document.body.classList.add(isDark ? "light-mode" : "dark-mode");
         themeIcon.className = isDark ? "fas fa-moon" : "fas fa-sun";
         localStorage.setItem("theme", isDark ? "light-mode" : "dark-mode");
       });
 
       // Mobile menu toggle
-      hamburger.addEventListener("click", function () {
+      hamburger.addEventListener("click", function (e) {
+        e.stopPropagation();
         navGroup.classList.toggle("show");
+        document.body.style.overflow = navGroup.classList.contains("show")
+          ? "hidden"
+          : "";
       });
 
       // Close mobile menu when clicking outside
       document.addEventListener("click", function (event) {
         if (
-          !event.target.closest(".hamburger") &&
-          !event.target.closest(".nav-group")
+          navGroup.classList.contains("show") &&
+          !event.target.closest(".nav-group") &&
+          !event.target.closest(".hamburger")
         ) {
           navGroup.classList.remove("show");
+          document.body.style.overflow = "";
+        }
+      });
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+      // Close mobile menu when pressing escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && navGroup.classList.contains("show")) {
+          navGroup.classList.remove("show");
+          document.body.style.overflow = "";
         }
       });
     </script>
   </body>
+  <footer class="copyright-section">
+    <p class="copyright-text">
+      Open to fork
+      <br />
+      Built with
+      <i
+        class="fas fa-heart copyright-icon"
+        style="color: var(--accent-color)"
+      ></i>
+      prompts
+    </p>
+  </footer>
 </html>
